@@ -292,7 +292,12 @@ a { color: inherit; }
 .nav a:hover { background: var(--sand-200); }
 .nav a[aria-current="page"] { color: var(--accent); font-weight: 600; }
 
+/* El CTA vive fuera del nav en escritorio y dentro del menú en móvil. */
 .header__cta { display: inline-flex; }
+
+@media (min-width: 861px) {
+  .nav > .btn { display: none; }
+}
 
 .nav-toggle {
   display: none;
