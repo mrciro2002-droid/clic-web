@@ -28,6 +28,13 @@ jobs:
         with:
           persist-credentials: false
 
+      # Escribe en index.html y equipo.html lo que hay en data/, que es lo que
+      # el equipo edita desde el panel. No instala nada: usa el Node que ya
+      # viene en el runner. Si fallara, las páginas conservan el último
+      # contenido generado y el sitio se publica igual.
+      - name: Generar el contenido editable
+        run: node scripts/construir.mjs
+
       - name: Configurar Pages
         uses: actions/configure-pages@v5
 

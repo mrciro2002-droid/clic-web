@@ -28,3 +28,14 @@ npm-debug.log*
 .cache/
 dist/
 tmp/
+
+# Capturas y videos de referencia del diseño: pesan mucho, no forman parte del
+# sitio publicado y no aportan nada a quien mire el repositorio. Se conservan
+# en el computador, pero no se suben.
+preview/
+
+# Documentos internos de trabajo. El repositorio es público, así que la
+# investigación de herramientas y la lista de pasos pendientes se quedan fuera.
+# Si algún día quieres publicarlos, borra estas dos líneas.
+INVESTIGACION-*.md
+PASOS-MANUALES.md

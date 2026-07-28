@@ -1,0 +1,32 @@
+{
+  "miembros": [
+    {
+      "nombre": "Pedro Pablo Morales",
+      "cargo": "Director General",
+      "iniciales": "PM",
+      "linkedin": "https://www.linkedin.com/in/pedro-pablo-morales-acosta-aab63a1a9",
+      "foto": ""
+    },
+    {
+      "nombre": "Guillermo Ulloa",
+      "cargo": "Director de Relaciones Institucionales",
+      "iniciales": "GU",
+      "linkedin": "https://www.linkedin.com/in/guillermo-ulloa-zavalla-pucuns2020",
+      "foto": ""
+    },
+    {
+      "nombre": "Ruth Torres",
+      "cargo": "Directora de Operaciones",
+      "iniciales": "RT",
+      "linkedin": "https://www.linkedin.com/in/ruth-torres-sep%C3%BAlveda-8b863a360",
+      "foto": ""
+    },
+    {
+      "nombre": "Alejandro Sepúlveda",
+      "cargo": "Director de Comunicaciones",
+      "iniciales": "AS",
+      "linkedin": "https://www.linkedin.com/in/alejandro-sep%C3%BAlveda-mart%C3%ADnez-344793327",
+      "foto": ""
+    }
+  ]
+}

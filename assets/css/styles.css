@@ -853,6 +853,11 @@ a { color: inherit; }
   transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
 }
 
+/* El avatar puede ser iniciales (span) o una foto subida desde el panel (img).
+   Con object-fit la foto llena el cuadro sin deformarse, sea cual sea su
+   proporción original. */
+img.member__avatar { object-fit: cover; }
+
 .member:hover .member__avatar {
   transform: scale(1.05) rotate(-3deg);
   box-shadow: var(--shadow-blue);

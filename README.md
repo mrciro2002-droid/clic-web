@@ -3,8 +3,9 @@
 Sitio web de **CLIC, Cámara Universitaria de Libre Competencia de Chile**.
 Rediseño del sitio original alojado en Google Sites.
 
-Construido con HTML, CSS y JavaScript puro: sin frameworks, sin dependencias,
-sin proceso de build.
+Construido con HTML, CSS y JavaScript puro: sin frameworks y sin dependencias
+de npm. El contenido que cambia seguido se edita desde un panel web y se
+escribe en las páginas con un script de Node sin librerías.
 
 ---
 
@@ -14,25 +15,60 @@ sin proceso de build.
 .
 ├── index.html            Página de inicio
 ├── equipo.html           Página del equipo
+├── data/                 Contenido editable desde el panel
+│   ├── novedades/        Una novedad por archivo
+│   ├── equipo.json       Integrantes de la directiva
+│   └── contacto.json     Correo, teléfono y redes
+├── scripts/
+│   └── construir.mjs     Escribe data/ dentro del HTML
+├── .pages.yml            Qué se puede editar en el panel, y con qué límites
 ├── assets/
 │   ├── css/styles.css    Estilos (variables CSS, layout, componentes)
 │   ├── js/main.js        Menú móvil, header sticky, animaciones
-│   └── img/              Logo e iconos (ver más abajo)
+│   └── img/
+│       └── subidas/      Imágenes cargadas desde el panel
 ├── .github/workflows/    Despliegue automático a GitHub Pages
+├── GUIA-PANEL.md         Cómo usar el panel (para el equipo)
 ├── .gitignore
 ├── LICENSE
 └── README.md
 ```
 
-## Cómo trabajar en el sitio
+## El panel de administración
 
-### 1. Abrir en VS Code
+El contenido que cambia seguido —novedades, integrantes del equipo, contacto y
+redes— se edita desde [Pages CMS](https://pagescms.org) en
+**[app.pagescms.org](https://app.pagescms.org)**, sin tocar código.
 
-```bash
-code "CLIC WEB"
+Cómo funciona: alguien guarda un cambio en el panel → se escribe en `data/` →
+GitHub Actions ejecuta `scripts/construir.mjs`, que vuelca ese contenido dentro
+de `index.html` y `equipo.html` → se publica el sitio. Tarda uno o dos minutos.
+
+El script solo reemplaza lo que está entre marcas como estas:
+
+```html
+<!-- clic:inicio novedades -->
+   ...generado automáticamente...
+<!-- clic:fin novedades -->
 ```
 
-### 2. Ver el sitio en el navegador
+Todo lo que esté fuera de esas marcas no se toca nunca. Por eso el diseño, las
+animaciones y la estructura de las páginas siguen escritos a mano.
+
+Si el script fallara, el sitio no se rompe: las páginas ya contienen el último
+contenido generado y se publican tal cual.
+
+Para probarlo localmente, sin instalar nada (requiere Node 18 o superior):
+
+```bash
+node scripts/construir.mjs
+```
+
+**Instrucciones para el equipo:** ver [`GUIA-PANEL.md`](GUIA-PANEL.md).
+
+## Cómo trabajar en el sitio
+
+### 1. Ver el sitio en el navegador
 
 La forma más simple: abre `index.html` con doble clic.
 
@@ -47,11 +83,17 @@ python -m http.server 8000
 # luego abre http://localhost:8000
 ```
 
-### 3. Editar
+### 2. Editar
 
-- **Textos y secciones** → `index.html` y `equipo.html`
+- **Novedades, equipo, contacto y redes** → desde el panel, no a mano
+- **Títulos de sección y textos del hero** → `index.html` y `equipo.html`
+  (pendiente de pasar al panel en la etapa 2)
 - **Colores, tipografía, espaciado** → bloque `:root` al inicio de `assets/css/styles.css`
 - **Comportamiento** → `assets/js/main.js`
+
+Si editas a mano algo que está entre marcas `clic:inicio` / `clic:fin`, el
+cambio se perderá en la siguiente publicación. Edítalo en el panel o en
+`data/`.
 
 ### La paleta
 
@@ -78,7 +120,7 @@ para hovers, bordes y fondos suaves.
 Son el mismo azul a distinta profundidad: se lee como un solo color, pero el
 texto queda legible. Si cambias `--accent`, ajusta también los otros dos.
 
-### 4. Los archivos del logo
+### 3. Los archivos del logo
 
 Todos derivan del logotipo original de CLIC y viven en `assets/img/`:
 
@@ -96,22 +138,21 @@ coherentes.
 
 ---
 
-## Pendientes antes de publicar
-
-Busca `TODO` en el código. Actualmente hay tres:
+## Pendientes
 
 1. **Enlace del formulario de postulación** (`index.html`, sección `#unete`).
-   El enlace heredado del Google Sites apunta al *editor* del formulario de
-   Microsoft Forms, no al formulario público. Reemplázalo por el enlace de
-   compartir (`https://forms.office.com/r/...`).
-2. **Novedades** (`index.html`, sección `#novedades`): las tres tarjetas son
-   contenido de ejemplo.
-3. **Fotos del equipo** (`equipo.html`): actualmente se usan iniciales. Para
-   usar fotos, reemplaza cada `<span class="member__avatar">XX</span>` por
-   `<img class="member__avatar" src="assets/img/nombre.jpg" alt="" width="74" height="74">`.
+   Falta poner el enlace definitivo del formulario de Microsoft Forms.
+2. **Dominio.** `clic-chile.cl` figura en `<link rel="canonical">` y `og:url`,
+   pero está sin confirmar. Si el dominio final es otro, hay que actualizarlo
+   en ambas páginas.
+3. **Etapa 2 del panel.** Llevar al panel los títulos de sección, las bajadas,
+   las cifras del hero y los pilares.
+4. **Imágenes en las novedades.** Hoy las tarjetas son solo texto. Añadir foto
+   requiere una decisión de diseño (proporción, recorte, comportamiento en
+   móvil) antes de tocar el CSS.
 
-También conviene reemplazar el dominio de ejemplo `clic-chile.cl` en las
-etiquetas `<link rel="canonical">` y `og:url` por el dominio real.
+Las novedades y las fotos del equipo ya no son pendientes: se administran
+desde el panel.
 
 ---
 
@@ -137,6 +178,12 @@ propia ejecución, con permisos mínimos de solo lectura sobre el repo.
 - El sitio es 100% estático: no hay backend, base de datos ni formularios que
   procesen datos personales. El formulario de postulación vive en Microsoft
   Forms.
+- El generador escapa todo el texto que viene del panel y descarta cualquier
+  enlace que no sea `https://`, `http://`, `mailto:` o `tel:`. Nadie puede
+  inyectar código en el sitio escribiendo en el panel.
+- Las personas invitadas al panel por correo no tienen acceso al repositorio
+  ni pueden modificar `.pages.yml`. Sus cambios se firman con la identidad de
+  la aplicación, así que no exponen su correo personal en el historial.
 - Todos los enlaces externos usan `rel="noopener noreferrer"`.
 - No se incluyen claves, tokens ni credenciales en el repositorio, y `.gitignore`
   bloquea archivos `.env` por si acaso.

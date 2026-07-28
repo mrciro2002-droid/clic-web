@@ -1,0 +1,223 @@
+# =====================================================================
+# Configuración del panel de administración (Pages CMS)
+# =====================================================================
+#
+# Este archivo define QUÉ se puede editar desde app.pagescms.org y con qué
+# límites. Solo lo puede modificar quien tenga acceso al repositorio en
+# GitHub: las personas invitadas por correo no lo ven ni lo pueden cambiar.
+#
+# Etapa 1 — lo que cambia seguido:
+#   · Novedades
+#   · Equipo
+#   · Contacto y redes
+#
+# Los títulos de sección, los pilares y los textos del hero quedan para la
+# etapa 2. Están escritos a mano en index.html a propósito: son los que
+# sostienen el diseño y no deberían cambiarse sin mirar cómo queda.
+#
+# Los límites de caracteres NO son un capricho: el diseño está calculado
+# para esas longitudes. Si se pasan, el generador recorta el texto y avisa.
+
+# ---------------------------------------------------------------------
+# Dónde se guardan las imágenes que suba el equipo
+# ---------------------------------------------------------------------
+# Van a una carpeta propia, separada del logo y los iconos del sitio, para
+# que nadie pueda sobrescribir la marca por accidente.
+#
+# `rename: safe` limpia el nombre del archivo: "Foto Ruth (1).JPG" pasa a
+# "foto-ruth-1.jpg". Sin esto, los acentos y espacios rompen las rutas.
+media:
+  input: assets/img/subidas
+  output: assets/img/subidas
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  # -------------------------------------------------------------------
+  # 1. NOVEDADES  (6 campos)
+  # -------------------------------------------------------------------
+  - name: novedades
+    label: Novedades
+    description: >-
+      Las tarjetas de la sección "Lo último de CLIC". Se ordenan solas por
+      fecha, de la más nueva a la más antigua.
+    type: collection
+    path: data/novedades
+    format: json
+    filename:
+      template: "{year}-{month}-{day}-{fields.titulo}.json"
+      field: false
+    view:
+      fields: [titulo, etiqueta, fecha, visible]
+      primary: titulo
+      sort: [fecha, titulo]
+      search: [titulo, resumen]
+      default:
+        sort: fecha
+        order: desc
+    fields:
+      - name: titulo
+        label: Título
+        type: string
+        required: true
+        description: Máximo 60 caracteres. Más largo que eso se desarma en el teléfono.
+        options:
+          minlength: 3
+          maxlength: 60
+
+      - name: etiqueta
+        label: Etiqueta
+        type: select
+        required: true
+        description: La palabra pequeña sobre el título.
+        options:
+          values: [Convocatoria, Actividad, Institucional, Comunicado, Contenido]
+
+      - name: fecha
+        label: Fecha
+        type: date
+        required: true
+        description: Solo sirve para ordenar las tarjetas. No se muestra en el sitio.
+
+      - name: resumen
+        label: Resumen
+        type: text
+        required: true
+        description: Máximo 180 caracteres. Dos o tres líneas, no un artículo.
+        options:
+          minlength: 10
+          maxlength: 180
+
+      - name: enlace
+        label: Enlace
+        type: string
+        description: >-
+          A dónde lleva la tarjeta (Instagram, LinkedIn, un PDF...). Debe
+          empezar con https://. Si lo dejas vacío, la tarjeta no será clicable.
+        pattern:
+          regex: "^(https?://.+)?$"
+          message: El enlace debe empezar con https://
+
+      - name: visible
+        label: Mostrar en el sitio
+        type: boolean
+        default: true
+        description: Desactívalo para ocultar la novedad sin borrarla.
+
+  # -------------------------------------------------------------------
+  # 2. EQUIPO  (5 campos)
+  # -------------------------------------------------------------------
+  - name: equipo
+    label: Equipo
+    description: Las tarjetas de la página "Equipo". Se muestran en el orden de esta lista.
+    type: file
+    path: data/equipo.json
+    format: json
+    fields:
+      - name: miembros
+        label: Integrantes
+        type: object
+        list:
+          min: 1
+        fields:
+          - name: nombre
+            label: Nombre
+            type: string
+            required: true
+            options:
+              maxlength: 40
+
+          - name: cargo
+            label: Cargo
+            type: string
+            required: true
+            description: Máximo 45 caracteres. Se muestra en mayúsculas.
+            options:
+              maxlength: 45
+
+          - name: iniciales
+            label: Iniciales
+            type: string
+            required: true
+            description: >-
+              Dos letras. Se usan como avatar cuando no hay foto (ej: "RT").
+            pattern:
+              regex: "^[A-ZÁÉÍÓÚÑ]{2}$"
+              message: Escribe exactamente dos letras mayúsculas.
+
+          - name: linkedin
+            label: LinkedIn
+            type: string
+            description: Opcional. Si lo dejas vacío, no aparece el botón.
+            pattern:
+              regex: "^(https://.+)?$"
+              message: Debe empezar con https://
+
+          - name: foto
+            label: Foto
+            type: image
+            description: >-
+              Opcional. Cuadrada, mínimo 150×150 px. Si no hay foto se usan
+              las iniciales.
+
+  # -------------------------------------------------------------------
+  # 3. CONTACTO Y REDES  (6 campos)
+  # -------------------------------------------------------------------
+  - name: contacto
+    label: Contacto y redes
+    description: >-
+      Aparece en el pie de las dos páginas y también es lo que leen Google y
+      WhatsApp cuando alguien comparte el sitio.
+    type: file
+    path: data/contacto.json
+    format: json
+    fields:
+      - name: correo
+        label: Correo electrónico
+        type: string
+        required: true
+        pattern:
+          regex: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+          message: Escribe un correo válido.
+
+      - name: telefono
+        label: Teléfono
+        type: string
+        required: true
+        description: 'Como se lee en el sitio, con espacios. Ej: +56 9 4581 3714'
+        options:
+          maxlength: 20
+
+      - name: whatsapp
+        label: WhatsApp
+        type: string
+        required: true
+        description: >-
+          Solo números, con el código de país y sin el signo +.
+          Ej: 56945813714
+        pattern:
+          regex: "^[0-9]{8,15}$"
+          message: Solo números, entre 8 y 15 dígitos, sin espacios ni signos.
+
+      - name: instagram
+        label: Instagram
+        type: string
+        description: Dirección completa del perfil.
+        pattern:
+          regex: "^(https://.+)?$"
+          message: Debe empezar con https://
+
+      - name: linkedin
+        label: LinkedIn
+        type: string
+        description: Dirección completa de la página de la organización.
+        pattern:
+          regex: "^(https://.+)?$"
+          message: Debe empezar con https://
+
+      - name: ubicacion
+        label: Ubicación
+        type: string
+        description: 'Última línea del pie. Ej: Chile'
+        options:
+          maxlength: 30
