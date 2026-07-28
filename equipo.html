@@ -29,6 +29,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+  <!-- Marca que el JavaScript está activo, antes del primer pintado.
+       El CSS solo oculta lo que va a animar si esta clase existe: sin JS la
+       página se ve completa y quieta, nunca en blanco. -->
+  <script>document.documentElement.classList.add("js");</script>
+
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 
@@ -61,6 +66,10 @@
 
       <a class="btn btn--accent header__cta" href="index.html#unete">Únete a CLIC</a>
     </div>
+
+    <div class="scroll-progress" aria-hidden="true">
+      <span class="scroll-progress__bar"></span>
+    </div>
   </header>
 
   <main id="main">
@@ -68,12 +77,12 @@
     <!-- ===================== INTRO ===================== -->
     <section class="hero" style="padding-block: clamp(3.5rem, 7vw, 6rem);">
       <div class="wrap">
-        <p class="hero__badge">
+        <p class="hero__badge hero-anim" style="--seq: 0">
           <span class="dot" aria-hidden="true"></span>
           Directiva CLIC
         </p>
-        <h1 class="hero__title" style="max-width: 16ch;">Nuestro <em>equipo</em></h1>
-        <p class="hero__text">
+        <h1 class="hero__title hero-anim" style="--seq: 1; max-width: 16ch;">Nuestro <em>equipo</em></h1>
+        <p class="hero__text hero-anim" style="--seq: 2">
           Un grupo multidisciplinario de estudiantes que impulsa la formación en
           libre competencia y buenas prácticas corporativas en Chile.
         </p>
@@ -83,13 +92,13 @@
     <!-- ===================== EQUIPO ===================== -->
     <section class="section">
       <div class="wrap">
-        <div class="section__head reveal">
+        <div class="section__head reveal reveal--soft">
           <p class="eyebrow">Directiva</p>
           <h2 class="section__title">Quiénes lideran CLIC</h2>
         </div>
 
         <div class="team-grid">
-          <article class="member reveal">
+          <article class="member reveal reveal--card">
             <span class="member__avatar" aria-hidden="true">PM</span>
             <h3 class="member__name">Pedro Pablo Morales</h3>
             <p class="member__role">Director General</p>
@@ -103,7 +112,7 @@
             </a>
           </article>
 
-          <article class="member reveal">
+          <article class="member reveal reveal--card">
             <span class="member__avatar" aria-hidden="true">GU</span>
             <h3 class="member__name">Guillermo Ulloa</h3>
             <p class="member__role">Director de Relaciones Institucionales</p>
@@ -117,7 +126,7 @@
             </a>
           </article>
 
-          <article class="member reveal">
+          <article class="member reveal reveal--card">
             <span class="member__avatar" aria-hidden="true">RT</span>
             <h3 class="member__name">Ruth Torres</h3>
             <p class="member__role">Directora de Operaciones</p>
@@ -131,7 +140,7 @@
             </a>
           </article>
 
-          <article class="member reveal">
+          <article class="member reveal reveal--card">
             <span class="member__avatar" aria-hidden="true">AS</span>
             <h3 class="member__name">Alejandro Sepúlveda</h3>
             <p class="member__role">Director de Comunicaciones</p>
@@ -151,14 +160,14 @@
     <!-- ===================== CTA ===================== -->
     <section class="cta-band">
       <div class="wrap cta-band__inner">
-        <div>
+        <div class="reveal reveal--soft">
           <h2 class="cta-band__title">¿Quieres ser parte del equipo?</h2>
           <p>
             Buscamos estudiantes de todas las carreras y universidades con interés
             en libre competencia, compliance y liderazgo.
           </p>
         </div>
-        <div class="cta-band__actions">
+        <div class="cta-band__actions reveal reveal--soft">
           <a class="btn btn--light" href="index.html#unete">Postula aquí</a>
           <a class="btn btn--outline-light" href="mailto:estudiantesclic@outlook.com">Escríbenos</a>
         </div>
