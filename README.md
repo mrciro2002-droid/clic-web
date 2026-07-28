@@ -53,16 +53,30 @@ python -m http.server 8000
 - **Colores, tipografía, espaciado** → bloque `:root` al inicio de `assets/css/styles.css`
 - **Comportamiento** → `assets/js/main.js`
 
-Los colores principales están centralizados como variables CSS:
+### La paleta
+
+El sitio usa tres colores oficiales:
+
+| Color | Hex | Uso |
+|---|---|---|
+| Azul CLIC | `#2596BE` | Acentos, bandas, botones, iconos |
+| Tinta | `#1C1C1C` | Texto y pie de página |
+| Blanco | `#FFFFFF` | Fondo de todo el sitio |
+
+Todo lo demás en `:root` son derivados de esos tres (aclarados u oscurecidos)
+para hovers, bordes y fondos suaves.
+
+**Por qué hay dos azules.** Blanco sobre `#2596BE` puro da un contraste de
+3.4:1, bajo el mínimo de 4.5:1 que exige WCAG AA para texto pequeño. Por eso:
 
 ```css
---navy-900: #06111f;   /* fondo oscuro */
---blue-500: #2f6fe4;   /* acento principal */
---cyan-400: #35d6c8;   /* acento secundario */
---sand-100: #f6f4ef;   /* fondo claro alternativo */
+--accent:         #2596BE;  /* acentos, bordes, títulos grandes */
+--accent-dark:    #196580;  /* texto pequeño sobre fondo claro   (6.5:1) */
+--accent-surface: #1E7D9F;  /* superficies sólidas con texto blanco (4.7:1) */
 ```
 
-Cambiar esas cuatro líneas cambia toda la paleta del sitio.
+Son el mismo azul a distinta profundidad: se lee como un solo color, pero el
+texto queda legible. Si cambias `--accent`, ajusta también los otros dos.
 
 ### 4. Los archivos del logo
 
