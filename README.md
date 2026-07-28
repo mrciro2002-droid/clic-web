@@ -17,7 +17,7 @@ sin proceso de build.
 ├── assets/
 │   ├── css/styles.css    Estilos (variables CSS, layout, componentes)
 │   ├── js/main.js        Menú móvil, header sticky, animaciones
-│   └── img/favicon.svg   Favicon
+│   └── img/              Logo e iconos (ver más abajo)
 ├── .github/workflows/    Despliegue automático a GitHub Pages
 ├── .gitignore
 ├── LICENSE
@@ -63,6 +63,22 @@ Los colores principales están centralizados como variables CSS:
 ```
 
 Cambiar esas cuatro líneas cambia toda la paleta del sitio.
+
+### 4. Los archivos del logo
+
+Todos derivan del logotipo original de CLIC y viven en `assets/img/`:
+
+| Archivo | Dónde se usa |
+|---|---|
+| `logo-oscuro.png` | Header, sobre fondo blanco |
+| `logo-blanco.png` | Pie de página, sobre fondo azul oscuro |
+| `og-image.png` | Vista previa al compartir el link (WhatsApp, LinkedIn, X) |
+| `favicon.ico` / `favicon.png` | Icono de la pestaña del navegador |
+| `apple-touch-icon.png` | Icono al guardar el sitio en la pantalla de inicio |
+| `icono-512.png` | Icono grande de reserva |
+
+Si el logo cambia, hay que regenerar las seis versiones para mantenerlas
+coherentes.
 
 ---
 
