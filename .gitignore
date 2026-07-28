@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno y secretos — NUNCA subir al repositorio
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+
+# Registros y temporales
+*.log
+npm-debug.log*
+.cache/
+dist/
+tmp/
