@@ -121,7 +121,7 @@ a { color: inherit; }
 }
 
 /* El tratamiento de `prefers-reduced-motion` está centralizado al final del
-   archivo (sección 13), para que gane sobre todas las reglas anteriores. */
+   archivo (sección 12), para que gane sobre todas las reglas anteriores. */
 
 /* --------------------------------------------------------------------------
    3. Utilidades de layout
@@ -582,44 +582,7 @@ a { color: inherit; }
 }
 
 /* --------------------------------------------------------------------------
-   7. Marquesina de pilares (banda azul)
-   -------------------------------------------------------------------------- */
-.marquee {
-  overflow: hidden;
-  padding-block: 1.1rem;
-  background: var(--accent-surface);
-  color: var(--white);
-}
-
-.marquee__track {
-  display: flex;
-  gap: 3rem;
-  width: max-content;
-  animation: marquee 34s linear infinite;
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.marquee__track span { display: inline-flex; align-items: center; gap: 3rem; }
-.marquee__track span::after {
-  content: "";
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.75);
-}
-
-.marquee:hover .marquee__track { animation-play-state: paused; }
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* --------------------------------------------------------------------------
-   8. Tarjetas
+   7. Tarjetas
    -------------------------------------------------------------------------- */
 .grid {
   display: grid;
@@ -716,7 +679,7 @@ a { color: inherit; }
 .pillar__body strong { color: var(--ink); font-weight: 600; }
 
 /* --------------------------------------------------------------------------
-   9. Franja de llamada a la acción (azul sólido)
+   8. Franja de llamada a la acción (azul sólido)
    -------------------------------------------------------------------------- */
 .cta-band {
   padding-block: clamp(3.5rem, 8vw, 6rem);
@@ -743,7 +706,7 @@ a { color: inherit; }
 .cta-band__actions { display: flex; flex-wrap: wrap; gap: 0.85rem; }
 
 /* --------------------------------------------------------------------------
-   10. Novedades
+   9. Novedades
    -------------------------------------------------------------------------- */
 .news-card {
   display: flex;
@@ -795,7 +758,7 @@ a { color: inherit; }
 .news-card:hover .news-card__more { transform: translate3d(4px, 0, 0); }
 
 /* --------------------------------------------------------------------------
-   11. Equipo
+   10. Equipo
    -------------------------------------------------------------------------- */
 .team-grid {
   display: grid;
@@ -872,7 +835,7 @@ img.member__avatar { object-fit: cover; }
 .member__link svg { width: 17px; height: 17px; }
 
 /* --------------------------------------------------------------------------
-   12. Pie de página
+   11. Pie de página
    -------------------------------------------------------------------------- */
 .site-footer {
   padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
@@ -937,7 +900,7 @@ img.member__avatar { object-fit: cover; }
 }
 
 /* --------------------------------------------------------------------------
-   13. Movimiento: revelados, entrada del hero y parallax
+   12. Movimiento: revelados, entrada del hero y parallax
 
    Regla de oro de este bloque: el estado por defecto de todo es VISIBLE.
    Nada se oculta salvo que la clase `.js` esté presente en <html>, y esa clase
@@ -1022,8 +985,6 @@ img.member__avatar { object-fit: cover; }
   }
 
   .hero::before { transform: none; }
-
-  .marquee__track { animation: none; transform: none; }
 
   .site-header__inner { transition: none; }
 

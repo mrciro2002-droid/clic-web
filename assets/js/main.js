@@ -15,7 +15,7 @@
  *   - `prefers-reduced-motion` desactiva cualquier movimiento, incluso si se
  *     activa con la página ya abierta.
  *   - Solo se tocan `transform` y `opacity`; nada de top/left/height.
- *   - El contenido visible es el estado por defecto (ver sección 13 del CSS).
+ *   - El contenido visible es el estado por defecto (ver sección 12 del CSS).
  *   - Un único bucle de requestAnimationFrame atiende todo el scroll.
  */
 (function () {
