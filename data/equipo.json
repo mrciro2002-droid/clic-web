@@ -22,10 +22,17 @@
       "foto": ""
     },
     {
-      "nombre": "Alejandro Sepúlveda",
-      "cargo": "Director de Comunicaciones",
-      "iniciales": "AS",
-      "linkedin": "https://www.linkedin.com/in/alejandro-sep%C3%BAlveda-mart%C3%ADnez-344793327",
+      "nombre": "Diego Cameratti",
+      "cargo": "Director de Finanzas",
+      "iniciales": "DC",
+      "linkedin": "https://www.linkedin.com/in/diegocameratti/",
+      "foto": ""
+    },
+    {
+      "nombre": "Amaro Letelier",
+      "cargo": "Head de Comunicaciones",
+      "iniciales": "AL",
+      "linkedin": "https://www.linkedin.com/in/amaro-letelier-suazo-2b4490326/",
       "foto": ""
     }
   ]
